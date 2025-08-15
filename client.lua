@@ -78,14 +78,14 @@ Citizen.CreateThread(function()
         local pcoords = GetEntityCoords(p)
         local d = #(pcoords - Config.SpawnPoint)
 
-        -- Interaction PNJ
-        if d < 50.0 then
+        -- Interaction PNJ pour entrer dans l'arène
+        if not inArena and d < 50.0 then
             DrawMarker(1, Config.SpawnPoint.x, Config.SpawnPoint.y, Config.SpawnPoint.z - 1.0, 0,0,0, 0,0,0, 1.0,1.0,0.2, 50,200,255, 100, false, true, 2, false, nil, nil, false)
             if d < Config.InteractDistance then
                 SetTextComponentFormat('STRING')
                 AddTextComponentString('Appuyez sur ~INPUT_CONTEXT~ pour rejoindre une arène PvP')
                 DisplayHelpTextFromStringLabel(0,0,1,-1)
-                if IsControlJustReleased(0, 38) then
+                if IsControlJustReleased(0, 38) then -- E key
                     TriggerEvent('pvp:openArenaMenu')
                 end
             end
@@ -102,6 +102,11 @@ Citizen.CreateThread(function()
                     TriggerEvent('chat:addMessage', { args = {"PvP", "^1Vous ne pouvez pas sortir de la zone !"} })
                 end
             end
+            
+            -- Afficher instruction de sortie
+            SetTextComponentFormat('STRING')
+            AddTextComponentString('Appuyez sur ~INPUT_CONTEXT~ pour quitter l\'arène')
+            DisplayHelpTextFromStringLabel(0,0,1,-1)
             
             -- Permettre de quitter avec E
             if IsControlJustReleased(0, 38) then -- E key
