@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PvP HUD</title>
+    <link rel="stylesheet" href="hud.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- HUD Principal -->
+    <div id="pvpHud" class="pvp-hud hidden">
+        <div class="hud-container">
+            <!-- Logo et titre -->
+            <div class="hud-header">
+                <div class="logo-section">
+                    <div class="logo-icon">⚔️</div>
+                    <span class="logo-text">PVP ARENA</span>
+                </div>
+            </div>
+            
+            <!-- Stats principales -->
+            <div class="stats-container">
+                <!-- Kills -->
+                <div class="stat-card kills">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-content">
+                        <div class="stat-label">KILLS</div>
+                        <div class="stat-value" id="killsCount">0</div>
+                    </div>
+                </div>
+                
+                <!-- Deaths -->
+                <div class="stat-card deaths">
+                    <div class="stat-icon">💀</div>
+                    <div class="stat-content">
+                        <div class="stat-label">DEATHS</div>
+                        <div class="stat-value" id="deathsCount">0</div>
+                    </div>
+                </div>
+                
+                <!-- K/D Ratio -->
+                <div class="stat-card kd">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="stat-label">K/D</div>
+                        <div class="stat-value" id="kdRatio">0.00</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Barre de progression pour le streak -->
+            <div class="streak-container">
+                <div class="streak-label">KILL STREAK</div>
+                <div class="streak-bar">
+                    <div class="streak-fill" id="streakFill"></div>
+                </div>
+                <div class="streak-count" id="streakCount">0</div>
+            </div>
+            
+            <!-- Instructions de sortie -->
+            <div class="exit-instruction">
+                <span class="exit-key">E</span>
+                <span class="exit-text">QUITTER L'ARÈNE</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="hud.js"></script>
+</body>
+</html>

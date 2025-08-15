@@ -1,0 +1,352 @@
+/* Reset et base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rajdhani', 'Arial', sans-serif;
+    background: transparent;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+/* HUD Principal */
+.pvp-hud {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.pvp-hud.hidden {
+    display: none;
+}
+
+.hud-container {
+    background: linear-gradient(135deg, rgba(15, 15, 20, 0.95), rgba(25, 25, 35, 0.9));
+    border: 2px solid rgba(255, 68, 68, 0.6);
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 320px;
+    box-shadow: 
+        0 0 30px rgba(255, 68, 68, 0.3),
+        0 10px 40px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.hud-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ff4444, transparent);
+    animation: scanline 3s ease-in-out infinite;
+}
+
+@keyframes scanline {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+/* Header avec logo */
+.hud-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    font-size: 24px;
+    filter: drop-shadow(0 0 10px rgba(255, 68, 68, 0.8));
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.logo-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ff4444;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+    letter-spacing: 2px;
+}
+
+/* Container des stats */
+.stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+/* Cartes de statistiques */
+.stat-card {
+    display: flex;
+    align-items: center;
+    background: rgba(20, 20, 30, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.stat-card:hover::before {
+    left: 100%;
+}
+
+.stat-card.kills {
+    border-left: 4px solid #00ff88;
+}
+
+.stat-card.deaths {
+    border-left: 4px solid #ff4444;
+}
+
+.stat-card.kd {
+    border-left: 4px solid #8a2be2;
+}
+
+.stat-icon {
+    font-size: 20px;
+    margin-right: 12px;
+    filter: drop-shadow(0 0 5px currentColor);
+}
+
+.stat-content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-label {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 18px;
+    font-weight: 900;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    min-width: 40px;
+    text-align: right;
+}
+
+/* Couleurs spécifiques pour les valeurs */
+.kills .stat-value {
+    color: #00ff88;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.deaths .stat-value {
+    color: #ff4444;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+}
+
+.kd .stat-value {
+    color: #8a2be2;
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+}
+
+/* Kill Streak */
+.streak-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.streak-label {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.streak-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.streak-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff4444, #ff8844, #ffaa44);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.streak-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: streak-shine 2s ease-in-out infinite;
+}
+
+@keyframes streak-shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.streak-count {
+    font-family: 'Orbitron', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffaa44;
+    text-shadow: 0 0 10px rgba(255, 170, 68, 0.5);
+}
+
+/* Instructions de sortie */
+.exit-instruction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background: rgba(255, 68, 68, 0.1);
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    border-radius: 8px;
+    animation: exit-glow 2s ease-in-out infinite;
+}
+
+@keyframes exit-glow {
+    0%, 100% { 
+        box-shadow: 0 0 5px rgba(255, 68, 68, 0.3);
+    }
+    50% { 
+        box-shadow: 0 0 15px rgba(255, 68, 68, 0.6);
+    }
+}
+
+.exit-key {
+    background: #ff4444;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.exit-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 1px;
+}
+
+/* Animations d'entrée */
+.pvp-hud.show {
+    animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pvp-hud {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .hud-container {
+        min-width: 280px;
+        padding: 15px;
+    }
+    
+    .logo-text {
+        font-size: 16px;
+    }
+    
+    .stat-value {
+        font-size: 16px;
+    }
+}
+
+/* Effets spéciaux pour les mises à jour */
+.stat-value.updated {
+    animation: statUpdate 0.6s ease-out;
+}
+
+@keyframes statUpdate {
+    0% { 
+        transform: scale(1);
+        color: inherit;
+    }
+    50% { 
+        transform: scale(1.2);
+        color: #ffffff;
+        text-shadow: 0 0 20px currentColor;
+    }
+    100% { 
+        transform: scale(1);
+        color: inherit;
+    }
+}
+
+/* Effet de kill streak élevé */
+.streak-container.high-streak {
+    animation: highStreak 1s ease-in-out infinite;
+}
+
+@keyframes highStreak {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
