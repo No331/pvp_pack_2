@@ -11,10 +11,8 @@ client_script 'client.lua'
 server_script 'server.lua'
 
 -- Interface utilisateur
-ui_page {
-    'html/index.html',
-    'html/hud.html'
-}
+ui_page 'html/index.html'
+
 files {
     'html/index.html',
     'html/style.css',
@@ -22,8 +20,4 @@ files {
     'html/hud.html',
     'html/hud.css',
     'html/hud.js'
-}
-
-server_scripts {
-	--[[server.lua]]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            'data/.vite.config.js',
 }

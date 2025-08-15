@@ -113,6 +113,7 @@ Citizen.CreateThread(function()
                 inArena = false
                 currentArena = nil
                 disableVMenu = false
+                SetNuiFocusKeepInput(false)
                 -- Cacher le HUD
                 SendNUIMessage({
                     action = "hideHud"
@@ -189,14 +190,13 @@ AddEventHandler('pvp:forceJoinClient', function(arenaIndex, arenaData)
 
     TriggerServerEvent('pvp:playerEnteredArena', arenaIndex)
     
-    -- Afficher le HUD moderne
-    SendNUIMessage({
-        action = "showHud"
-    })
+    -- Attendre un peu avant d'afficher le HUD
+    Citizen.Wait(500)
     
-    -- Initialiser les stats du HUD
+    -- Afficher le HUD moderne avec iframe séparée
+    SetNuiFocusKeepInput(true)
     SendNUIMessage({
-        action = "updateStats",
+        action = "showHud",
         kills = hud.kills,
         deaths = hud.deaths,
         streak = hud.streak
@@ -211,6 +211,7 @@ RegisterCommand("quitpvp", function()
         inArena = false
         currentArena = nil
         disableVMenu = false
+        SetNuiFocusKeepInput(false)
         -- Cacher le HUD
         SendNUIMessage({
             action = "hideHud"
